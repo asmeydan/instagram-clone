@@ -8,7 +8,6 @@ import NewPost from "./components/NewPost";
 function App() {
   const [token] = useToken()
   const [newPost, setNewPost] = useState(false)
-  console.log(token);
 
   return (
     <BrowserRouter>
