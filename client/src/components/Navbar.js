@@ -5,19 +5,24 @@ import { BiMoviePlay } from 'react-icons/bi';
 import { RiCloseLine } from 'react-icons/ri';
 import { FaTelegramPlane, FaUser } from 'react-icons/fa';
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { openModal } from "../store/reducers/modal"
+import { logoutState } from "../store/reducers/user"
 
-const Navbar = ({ setNewPost }) => {
+const Navbar = () => {
+  const dispatch = useDispatch()
+  
   return (
     <div className=" h-[50px] w-full bg-black text-white fixed bottom-0 flex justify-center md:flex-col md:left-0  md:w-[70px] md:h-full md:px-3 gap-40 md:py-5 text-2xl border-t border-zinc-700 md:border-r md:border-zinc-700">
       <div className=" flex justify-evenly w-full md:flex-col flex-1 items-center">
         <Link to="/" ><AiFillHome /></Link>
         <Link to="/" ><MdExplore /></Link>
         <Link to="/" ><BiMoviePlay /></Link>
-        <div className=" cursor-pointer" onClick={()=> setNewPost(true)}><MdOutlineAddBox /></div>
+        <div className=" cursor-pointer" onClick={()=> dispatch(openModal())}><MdOutlineAddBox /></div>
         <Link to="/"><FaTelegramPlane /></Link>
         <Link to="/"><FaUser /></Link>
         <div className=" bg-red-600/60 rounded-full cursor-pointer" onClick={()=> {
-          localStorage.clear();
+          dispatch(logoutState())
           window.location = "/"
         }}><RiCloseLine /></div>
       </div>

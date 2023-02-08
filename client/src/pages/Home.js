@@ -2,11 +2,11 @@ import React from 'react'
 import Header from '../components/Header'
 import Navbar from '../components/Navbar'
 
-const Home = ({ setNewPost }) => {
+const Home = () => {
   return (
     <div className=' bg-black min-h-screen'>
       <Header />
-      <Navbar setNewPost={setNewPost} />
+      <Navbar />
     </div>
   )
 }

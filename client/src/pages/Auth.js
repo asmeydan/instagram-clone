@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { login, register } from "../axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { loginState, registerState } from '../store/reducers/user';
 
 const Auth = () => {
+  const dispatch = useDispatch()
+  
   const [isLogin, setIsLogin] = useState(true);
   const [authData, setAuthData] = useState({
     email: "",
@@ -18,8 +22,8 @@ const Auth = () => {
         if(isLogin) {
           console.log("login");
           login({email: authData.email, password: authData.password}).then((res)=> {
-            localStorage.setItem("auth", JSON.stringify(res.data));
-            window.location = "/"
+            dispatch(loginState(res.data))
+            window.location = "/";
           }).catch((err)=> {
             toast(err.response.data.message, {
               position: "top-right",
@@ -30,7 +34,7 @@ const Auth = () => {
         else {
           console.log(authData)
           register(authData).then((res)=> {
-            localStorage.setItem("auth", JSON.stringify(res.data));
+            dispatch(registerState(res.data))
             window.location = "/"
           }).catch((err)=> {
             toast(err.response.data.message, {
