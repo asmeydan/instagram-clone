@@ -7,7 +7,7 @@ import ProfilePosts from "../components/ProfilePosts";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
-  const [ profileType, setProfileType] = useState("GÖNDERİLER")
+  const [profileType, setProfileType] = useState("GÖNDERİLER");
 
   return (
     <div className=" bg-zinc-900 min-h-screen md:pl-[70px] ">
@@ -25,8 +25,7 @@ const Profile = () => {
             </div>
             <div>
               <button className=" w-[250px] h-8 px-4 bg-white rounded-lg font-medium ">
-                {" "}
-                Profili düzenle{" "}
+                Profili düzenle
               </button>
             </div>
           </div>
@@ -42,14 +41,20 @@ const Profile = () => {
       </div>
 
       <div className=" text-white pb-[21px] border-b border-zinc-700 md:hidden h-[60px] w-full flex justify-around items-center py-3 ">
-        <div className=" flex items-center justify-center flex-col"><div className=" font-medium">0</div>gönderi</div>
-        <div className=" flex items-center justify-center flex-col"><div className=" font-medium">0</div>takipçi</div>
-        <div className=" flex items-center justify-center flex-col"><div className=" font-medium">0</div>takip</div>
+        <div className=" flex items-center justify-center flex-col">
+          <div className=" font-medium">0</div>gönderi
+        </div>
+        <div className=" flex items-center justify-center flex-col">
+          <div className=" font-medium">0</div>takipçi
+        </div>
+        <div className=" flex items-center justify-center flex-col">
+          <div className=" font-medium">0</div>takip
+        </div>
       </div>
 
       <span className=" hidden md:block h-px bg-zinc-700 w-full mt-10 "></span>
 
-      <ProfilePosts profileType={profileType} setProfileType={setProfileType}  />
+      <ProfilePosts profileType={profileType} setProfileType={setProfileType} />
 
       <Navbar />
     </div>
