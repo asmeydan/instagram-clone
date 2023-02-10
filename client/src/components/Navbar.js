@@ -20,7 +20,7 @@ const Navbar = () => {
         <Link to="/" ><BiMoviePlay /></Link>
         <div className=" cursor-pointer" onClick={()=> dispatch(openModal())}><MdOutlineAddBox /></div>
         <Link to="/"><FaTelegramPlane /></Link>
-        <Link to="/"><FaUser /></Link>
+        <Link to="/profile"><FaUser /></Link>
         <div className=" bg-red-600/60 rounded-full cursor-pointer" onClick={()=> {
           dispatch(logoutState())
           window.location = "/"

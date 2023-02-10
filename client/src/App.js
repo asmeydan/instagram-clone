@@ -1,21 +1,29 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
+import Profile from "./pages/Profile";
 import useToken from "./hooks/useToken";
 import NewPost from "./components/NewPost";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 function App() {
-  const [token] = useToken()
-  const {open: isOpenModal} = useSelector((state)=> state.modal)
+  const [token] = useToken();
+  const { open: isOpenModal } = useSelector((state) => state.modal);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/auth" element={token ?(<Navigate to={"/"} />) :(<Auth />)} />
+        <Route
+          path="/auth"
+          element={token ? <Navigate to={"/"} /> : <Auth />}
+        />
+        <Route
+          path="/profile"
+          element={!token ? <Navigate to={"/auth"} /> : <Profile />}
+        />
         <Route
           path="/"
-          element={!token ?(<Navigate to={"/auth"} />) :(<Home />)}
+          element={!token ? <Navigate to={"/auth"} /> : <Home />}
         />
       </Routes>
       {isOpenModal && <NewPost />}
