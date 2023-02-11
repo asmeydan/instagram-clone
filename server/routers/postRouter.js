@@ -6,10 +6,11 @@ const router = express.Router();
 
 router.post("/", async (req, res)=> {
     try {
-        const { fullname, text} = req.body
+        const { username, image, description} = req.body
         const createdPost = await Post.create({
-            fullname,
-            text
+            username,
+            image,
+            description
         })
         return res.status(201).json(createdPost)
 

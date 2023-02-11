@@ -16,7 +16,7 @@ const Navbar = () => {
     <div className=" h-[50px] w-full bg-black text-white fixed bottom-0 flex justify-center md:flex-col md:left-0  md:w-[70px] md:h-full md:px-3 gap-40 md:py-5 text-2xl border-t border-zinc-700 md:border-r md:border-zinc-700">
       <div className=" flex justify-evenly w-full md:flex-col flex-1 items-center">
         <Link to="/" ><AiFillHome /></Link>
-        <Link to="/" ><MdExplore /></Link>
+        <Link to="/explore" ><MdExplore /></Link>
         <Link to="/" ><BiMoviePlay /></Link>
         <div className=" cursor-pointer" onClick={()=> dispatch(openModal())}><MdOutlineAddBox /></div>
         <Link to="/"><FaTelegramPlane /></Link>

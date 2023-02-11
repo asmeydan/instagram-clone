@@ -1,13 +1,19 @@
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
-    email: {
+    username: {
         type: String,
         required: true
     },
-    fullname: {
-        type: String,
-        required: true
+    image: {
+        type: String
+    },
+    description: {
+        type: String
+    },
+    comments: [String],
+    likes: {
+        type: Number
     }
 })
 

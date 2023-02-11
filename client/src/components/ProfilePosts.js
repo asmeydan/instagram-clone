@@ -1,6 +1,10 @@
 import React from 'react'
+import { useSelector } from "react-redux";
 
 const ProfilePosts = ({ profileType, setProfileType }) => {
+    const { posts } = useSelector((state) => state.posts);
+    const { user } = useSelector((state) => state.user);
+
   return (
     <div className=' flex flex-col items-center justify-center text-white'>
         <div className=' flex gap-[60px] '>
@@ -9,8 +13,14 @@ const ProfilePosts = ({ profileType, setProfileType }) => {
             <div className={` h-[50px] flex justify-center items-center cursor-pointer ${profileType === "ETİKETLENENLER" && " border-t border-white"}`} onClick={()=>setProfileType("ETİKETLENENLER")}>ETİKETLENENLER</div>
         </div>
 
-        {profileType === "GÖNDERİLER" && <div className={`min-h-[300px] w-full flex justify-center items-center`}>
-            gönderiler
+        {profileType === "GÖNDERİLER" && <div className={`min-h-[300px] w-full grid grid-cols-3 md:p-5 gap-1 md:gap-5 pb-20`}>
+            {
+                posts.filter((e)=> {return e.username === user.username}).reverse().map((e)=> (
+                    <div key={e._id} className="transition-all bg-black rounded hover:brightness-50 cursor-pointer flex justify-center items-center">
+                        <img src={e.image} alt="img" />
+                    </div>
+                ))
+            }
         </div>}
         {profileType === "KAYDEDİLENLER" && <div className={`min-h-[300px] w-full flex justify-center items-center`}>
             kaydedilenler

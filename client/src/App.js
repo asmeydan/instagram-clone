@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import useToken from "./hooks/useToken";
 import NewPost from "./components/NewPost";
 import { useSelector } from "react-redux";
+import Explore from "./pages/Explore";
 
 function App() {
   const [token] = useToken();
@@ -17,13 +18,17 @@ function App() {
           path="/auth"
           element={token ? <Navigate to={"/"} /> : <Auth />}
         />
+          <Route
+            path="/"
+            element={!token ? <Navigate to={"/auth"} /> : <Home />}
+          />
         <Route
           path="/profile"
           element={!token ? <Navigate to={"/auth"} /> : <Profile />}
         />
         <Route
-          path="/"
-          element={!token ? <Navigate to={"/auth"} /> : <Home />}
+          path="/explore"
+          element={!token ? <Navigate to={"/auth"} /> : <Explore />}
         />
       </Routes>
       {isOpenModal && <NewPost />}
