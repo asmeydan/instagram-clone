@@ -3,10 +3,12 @@ import Navbar from "../components/Navbar";
 import { useSelector, useDispatch } from "react-redux";
 import { allPosts } from '../axios'
 import { allPostsState } from '../store/reducers/post'
+import { useNavigate } from "react-router-dom";
 
 const Explore = () => {
   const { posts } = useSelector((state) => state.posts);
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   useEffect(()=> {
     allPosts().then((res)=> dispatch(allPostsState(res.data)))
@@ -19,7 +21,7 @@ const Explore = () => {
       </div>
       <div className=" grid grid-cols-3 pt-10 md:p-10 md:gap-5">
         {posts.map((e) => (
-          <div key={e._id} onClick={()=> window.location = `/post/${e._id}`} className=" transition-all bg-black rounded hover:brightness-50 cursor-pointer flex justify-center items-center">
+          <div key={e._id} onClick={()=> navigate(`/post/${e._id}`)} className=" transition-all bg-black rounded hover:brightness-50 cursor-pointer flex justify-center items-center">
             <img src={e.image} alt="img" />
           </div>
         ))}

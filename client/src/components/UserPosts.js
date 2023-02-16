@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 
 const ProfilePosts = ({ profileType, setProfileType, posts }) => {
+    const navigate = useNavigate();
 
   return (
     <div className=' flex flex-col items-center justify-center text-white'>
@@ -13,7 +15,7 @@ const ProfilePosts = ({ profileType, setProfileType, posts }) => {
         {profileType === "GÖNDERİLER" && <div className={`min-h-[300px] w-full grid grid-cols-3 md:p-5 gap-1 md:gap-5 pb-20`}>
             {
                 posts.map((e)=> (
-                    <div key={e._id} onClick={()=> window.location = `/post/${e._id}`} className="transition-all bg-black rounded hover:brightness-50 cursor-pointer flex justify-center items-center">
+                    <div key={e._id} onClick={()=> navigate(`/post/${e._id}`)} className="transition-all bg-black rounded hover:brightness-50 cursor-pointer flex justify-center items-center">
                         <img src={e.image} alt="img" />
                     </div>
                 ))

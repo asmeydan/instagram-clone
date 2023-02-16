@@ -3,6 +3,7 @@ import { GrClose } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../store/reducers/modal';
 import { addPost } from "../axios";
+import { useNavigate } from "react-router-dom";
 
 
 const NewPost = () => {
@@ -12,6 +13,7 @@ const NewPost = () => {
     image: "",
     description: ""
   })
+  const navigate = useNavigate();
   
   return (
     <div className=' fixed top-0 bottom-0 right-0 left-0 bg-white/20 flex justify-center items-center text-white '>
@@ -23,7 +25,7 @@ const NewPost = () => {
               console.log(postData)
               addPost({...postData, username: user.username}).then((res)=> {
                 dispatch(closeModal())
-                window.location = "/"
+                navigate("/")
               }).catch((err)=>{console.log(err)})
               e.preventDefault()
             }}>

@@ -3,16 +3,24 @@ import { useParams } from 'react-router-dom'
 import { singleUser, userPosts } from '../axios'
 import Navbar from '../components/Navbar'
 import UserPosts from '../components/UserPosts'
+import { useSelector } from 'react-redux'
+import { useNavigate } from "react-router-dom";
 
 const UserDetail = () => {
   const { username } = useParams()
   const [ userDetail, setUserDetail ] = useState(null);
   const [profileType, setProfileType] = useState("GÖNDERİLER");
   const [posts, setPosts] = useState([]);
+  const [ isFollowed, setIsFollowed] = useState(false)
+  const { user } = useSelector((state) => state.user)
+  const navigate = useNavigate();
 
   useEffect(()=> {
+    if(user?.username === username) {
+      navigate("/profile")
+    }
     singleUser({username: username}).then((res)=> setUserDetail(res.data.user)).catch((err)=> console.log(err))
-  }, [username])
+  }, [username, user, navigate])
 
   useEffect(()=> {
     userPosts({username: username}).then((res)=> setPosts(res.data)).catch((err)=> console.log(err))
@@ -31,8 +39,8 @@ const UserDetail = () => {
               {userDetail?.username}
             </div>
             <div className=' flex gap-2'>
-              <button className=" h-8 px-4 bg-sky-600 text-white rounded-lg font-medium ">
-                Takip Et
+              <button onClick={()=> setIsFollowed(!isFollowed)} className={` h-8 px-4 rounded-lg font-medium ${ isFollowed ?"bg-white text-black" : "bg-sky-600 text-white"} `}>
+                {isFollowed ?"Takiptesin" :"Takip Et"}
               </button>
               <button className=" h-8 px-4 bg-white rounded-lg font-medium ">
                 Mesaj Gönder
@@ -40,7 +48,7 @@ const UserDetail = () => {
             </div>
           </div>
           <div className=" text-white hidden md:flex md:gap-10">
-            <span>0 gönderi</span> <span>0 takipçi</span> <span>0 takip</span>
+            <span>{posts.length} gönderi</span> <span>0 takipçi</span> <span>0 takip</span>
           </div>
           <div className=" text-white hidden md:block ">{userDetail?.fullname}</div>
         </div>

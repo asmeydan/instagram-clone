@@ -12,9 +12,7 @@ const postSchema = mongoose.Schema({
         type: String
     },
     comments: [String],
-    likes: {
-        type: Number
-    }
+    likes: [String]
 })
 
 export default mongoose.model('Post', postSchema);

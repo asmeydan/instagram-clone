@@ -36,7 +36,7 @@ const Profile = () => {
             </div>
           </div>
           <div className=" text-white hidden md:flex md:gap-10">
-            <span>0 gönderi</span> <span>0 takipçi</span> <span>0 takip</span>
+            <span>{posts.length} gönderi</span> <span>0 takipçi</span> <span>0 takip</span>
           </div>
           <div className=" text-white hidden md:block ">{user.fullname}</div>
         </div>
