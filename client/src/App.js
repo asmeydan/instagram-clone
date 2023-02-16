@@ -6,6 +6,8 @@ import useToken from "./hooks/useToken";
 import NewPost from "./components/NewPost";
 import { useSelector } from "react-redux";
 import Explore from "./pages/Explore";
+import UserDetail from "./pages/UserDetail"
+import PostDetail from "./pages/PostDetail"
 
 function App() {
   const [token] = useToken();
@@ -30,6 +32,8 @@ function App() {
           path="/explore"
           element={!token ? <Navigate to={"/auth"} /> : <Explore />}
         />
+        <Route path="/user/:username" element={<UserDetail />} />
+        <Route path="/post/:_id" element={<PostDetail />} />
       </Routes>
       {isOpenModal && <NewPost />}
     </BrowserRouter>

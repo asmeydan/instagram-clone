@@ -57,4 +57,18 @@ router.post("/signin", async (req, res)=> {
     } 
 })
 
+router.post("/singleuser", async (req, res)=> {
+    try {
+        const {username} = req.body;
+        const user = await User.findOne({username});
+        if(!user) {
+            return res.status(400).json({ message: "user does not exist"})
+        }
+        return res.status(200).json({user})
+    }
+    catch(error) {
+        return res.status(400).json({message: error.message})
+    } 
+})
+
 export default router

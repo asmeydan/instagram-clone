@@ -28,4 +28,26 @@ router.get("/", async (req, res)=> {
     }
 })
 
+router.post("/userposts", async (req, res)=> {
+    try {
+        const { username } = req.body
+        const posts = await Post.find({ username });
+        return res.status(201).json(posts)
+
+    } catch (error) {
+        return res.status(400).json({message: error.message})
+    }
+})
+
+router.post("/postdetail", async (req, res)=> {
+    try {
+        const { _id } = req.body
+        const post = await Post.findOne({ _id });
+        return res.status(201).json(post)
+
+    } catch (error) {
+        return res.status(400).json({message: error.message})
+    }
+})
+
 export default router
