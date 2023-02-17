@@ -13,7 +13,7 @@ const ProfileHeader = () => {
         <RiSettings3Fill />
       </div>
       <div className=' flex items-center gap-2 font-semibold'>
-        {user.username}
+        {user?.username}
         <BsChevronDown />
       </div>
       <div className=' flex justify-center items-center gap-4'>

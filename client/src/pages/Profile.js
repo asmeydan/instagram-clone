@@ -12,7 +12,7 @@ const Profile = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(()=> {
-    userPosts({username: user.username}).then((res)=> setPosts(res.data)).catch((err)=> console.log(err))
+    userPosts({username: user?.username}).then((res)=> setPosts(res.data)).catch((err)=> console.log(err))
   }, [user])
 
   return (
@@ -26,7 +26,7 @@ const Profile = () => {
         <div className=" flex flex-col justify-around h-full">
           <div className=" flex flex-col md:flex-row justify-center gap-4">
             <div className=" flex items-center gap-2 text-white">
-              {user.username}
+              {user?.username}
               <RiSettings3Fill />
             </div>
             <div>
@@ -36,25 +36,25 @@ const Profile = () => {
             </div>
           </div>
           <div className=" text-white hidden md:flex md:gap-10">
-            <span>{posts.length} gönderi</span> <span>0 takipçi</span> <span>0 takip</span>
+            <span>{posts.length} gönderi</span> <span>{user?.followers.length} takipçi</span> <span>{user?.following.length} takip</span>
           </div>
-          <div className=" text-white hidden md:block ">{user.fullname}</div>
+          <div className=" text-white hidden md:block ">{user?.fullname}</div>
         </div>
       </div>
 
       <div className=" text-white pl-4 pb-[21px] border-b border-zinc-700 md:hidden ">
-        {user.fullname}
+        {user?.fullname}
       </div>
 
       <div className=" text-white pb-[21px] border-b border-zinc-700 md:hidden h-[60px] w-full flex justify-around items-center py-3 ">
         <div className=" flex items-center justify-center flex-col">
-          <div className=" font-medium">0</div>gönderi
+          <div className=" font-medium">{posts.length}</div>gönderi
         </div>
         <div className=" flex items-center justify-center flex-col">
-          <div className=" font-medium">0</div>takipçi
+          <div className=" font-medium">{user?.followers.length}</div>takipçi
         </div>
         <div className=" flex items-center justify-center flex-col">
-          <div className=" font-medium">0</div>takip
+          <div className=" font-medium">{user?.following.length}</div>takip
         </div>
       </div>
 

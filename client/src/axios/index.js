@@ -10,6 +10,8 @@ export const register = async (formData)=> await HTTP.post('/users/signup', form
 
 export const singleUser = async (user)=> await HTTP.post('/users/singleuser', user)
 
+export const followFetch = async (username, follower)=> await HTTP.post('/users/follow', username, follower)
+
 export const addPost = async (postData)=> await HTTP.post('/posts', postData);
 
 export const allPosts = async ()=> await HTTP.get('/posts');

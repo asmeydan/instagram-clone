@@ -8,11 +8,9 @@ import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { openModal } from "../store/reducers/modal"
 import { logoutState } from "../store/reducers/user"
-import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate();
   
   return (
     <div className=" h-[50px] w-full bg-black text-white fixed bottom-0 flex justify-center md:flex-col md:left-0  md:w-[70px] md:h-full md:px-3 gap-40 md:py-5 text-2xl border-t border-zinc-700 md:border-r md:border-zinc-700">
@@ -25,7 +23,7 @@ const Navbar = () => {
         <Link to="/profile"><FaUser /></Link>
         <div className=" bg-red-600/60 rounded-full cursor-pointer" onClick={()=> {
           dispatch(logoutState())
-          navigate("/")
+          window.location = "/"
         }}><RiCloseLine /></div>
       </div>
       <div className=" hidden md:block">

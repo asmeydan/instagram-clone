@@ -22,7 +22,6 @@ const NewPost = () => {
                 Yeni gönderi oluştur
             </div>
             <form className='h-full flex flex-col justify-center items-center gap-4 ' onSubmit={(e)=> {
-              console.log(postData)
               addPost({...postData, username: user.username}).then((res)=> {
                 dispatch(closeModal())
                 navigate("/")

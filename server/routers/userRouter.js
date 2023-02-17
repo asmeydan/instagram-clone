@@ -32,7 +32,7 @@ router.post("/signup", async (req, res)=> {
         })
 
         const token = jwt.sign({id: createdUser._id}, `${process.env.JWT_KEY}`, {expiresIn: '1h'})
-        return res.status(201).json({ createdUser, token}) 
+        return res.status(201).json({ user: createdUser, token}) 
     } catch (error) {
         return res.json({ message: error.message})
     }
@@ -65,6 +65,18 @@ router.post("/singleuser", async (req, res)=> {
             return res.status(400).json({ message: "user does not exist"})
         }
         return res.status(200).json({user})
+    }
+    catch(error) {
+        return res.status(400).json({message: error.message})
+    } 
+})
+
+router.post("/follow", async (req, res)=> {
+    try {
+        const { username, follower} = req.body;
+        const user = await User.findOneAndUpdate({username}, { $push: { followers: follower } });
+        const followingUser = await User.findOneAndUpdate({username: follower}, { $push: { following: username } });
+        return res.status(200).json({user, followingUser})
     }
     catch(error) {
         return res.status(400).json({message: error.message})
