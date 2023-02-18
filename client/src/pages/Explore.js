@@ -20,7 +20,7 @@ const Explore = () => {
         <input type="text" className=" w-full h-10 rounded-lg px-4 bg-zinc-700" placeholder="Ara" />
       </div>
       <div className=" grid grid-cols-3 pt-10 md:p-10 md:gap-5">
-        {posts.map((e) => (
+        {posts.filter(()=> {return 1}).reverse().map((e) => (
           <div key={e._id} onClick={()=> navigate(`/post/${e._id}`)} className=" transition-all bg-black rounded hover:brightness-50 cursor-pointer flex justify-center items-center">
             <img src={e.image} alt="img" />
           </div>

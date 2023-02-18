@@ -14,7 +14,7 @@ const ProfilePosts = ({ profileType, setProfileType, posts }) => {
 
         {profileType === "GÖNDERİLER" && <div className={`min-h-[300px] w-full grid grid-cols-3 md:p-5 gap-1 md:gap-5 pb-20`}>
             {
-                posts.map((e)=> (
+                posts.filter(()=> {return 1}).reverse().map((e)=> (
                     <div key={e._id} onClick={()=> navigate(`/post/${e._id}`)} className="transition-all bg-black rounded hover:brightness-50 cursor-pointer flex justify-center items-center">
                         <img src={e.image} alt="img" />
                     </div>

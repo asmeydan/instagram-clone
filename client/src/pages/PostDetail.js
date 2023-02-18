@@ -80,7 +80,7 @@ const PostDetail = () => {
             <BsBookmark size={30} />
           </div>
 
-          <div className=" mt-2">0 beğenme</div>
+          <div className=" mt-2">{post?.likes.length} beğenme</div>
 
           <div className=" hidden h-10 p-1 md:flex items-center border-t border-zinc-700">
             Yorum ekle

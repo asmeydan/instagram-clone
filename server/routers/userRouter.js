@@ -83,4 +83,16 @@ router.post("/follow", async (req, res)=> {
     } 
 })
 
+router.post("/unfollow", async (req, res)=> {
+    try {
+        const { username, follower} = req.body;
+        const user = await User.findOneAndUpdate({username}, { $pull: { followers: follower } });
+        const followingUser = await User.findOneAndUpdate({username: follower}, { $pull: { following: username } });
+        return res.status(200).json({user, followingUser})
+    }
+    catch(error) {
+        return res.status(400).json({message: error.message})
+    } 
+})
+
 export default router

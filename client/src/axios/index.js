@@ -12,6 +12,8 @@ export const singleUser = async (user)=> await HTTP.post('/users/singleuser', us
 
 export const followFetch = async (username, follower)=> await HTTP.post('/users/follow', username, follower)
 
+export const unfollowFetch = async (username, follower)=> await HTTP.post('/users/unfollow', username, follower)
+
 export const addPost = async (postData)=> await HTTP.post('/posts', postData);
 
 export const allPosts = async ()=> await HTTP.get('/posts');

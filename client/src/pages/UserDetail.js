@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { followFetch, singleUser, userPosts } from "../axios";
+import { followFetch, singleUser, unfollowFetch, userPosts } from "../axios";
 import Navbar from "../components/Navbar";
 import UserPosts from "../components/UserPosts";
 import { useSelector } from "react-redux";
@@ -30,6 +30,9 @@ const UserDetail = () => {
       .catch((err) => console.log(err));
   }, [username]);
 
+  useEffect(()=> {
+    if(userDetail?.followers.includes(user?.username)) setIsFollowed(true)
+  }, [userDetail, user])
 
   return (
     <div className=" bg-zinc-900 min-h-screen md:pl-[70px] ">
@@ -45,7 +48,10 @@ const UserDetail = () => {
             <div className=" flex gap-2">
               {isFollowed ? (
                 <button
-                  onClick={() => setIsFollowed(false)}
+                  onClick={() => {
+                    setIsFollowed(false)
+                    unfollowFetch({username: userDetail?.username, follower: user?.username}).catch((err)=> console.log(err))
+                  }}
                   className={` h-8 px-4 rounded-lg font-medium  bg-white text-black `}
                 >
                   Takiptesin
@@ -54,8 +60,7 @@ const UserDetail = () => {
                 <button
                   onClick={() => {
                     setIsFollowed(true)
-                    console.log(userDetail?.username, user?.username)
-                    followFetch({username: userDetail?.username, follower: user?.username}).then((res)=> console.log(res)).catch((err)=> console.log(err))
+                    followFetch({username: userDetail?.username, follower: user?.username}).catch((err)=> console.log(err))
                   }}
                   className={` h-8 px-4 rounded-lg font-medium bg-sky-600 text-white `}
                 >

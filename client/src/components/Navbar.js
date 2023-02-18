@@ -17,9 +17,9 @@ const Navbar = () => {
       <div className=" flex justify-evenly w-full md:flex-col flex-1 items-center">
         <Link to="/" ><AiFillHome /></Link>
         <Link to="/explore" ><MdExplore /></Link>
-        <Link to="/" ><BiMoviePlay /></Link>
+        <div ><BiMoviePlay className=" text-zinc-500" /></div>
         <div className=" cursor-pointer" onClick={()=> dispatch(openModal())}><MdOutlineAddBox /></div>
-        <Link to="/"><FaTelegramPlane /></Link>
+        <div><FaTelegramPlane className=" text-zinc-500" /></div>
         <Link to="/profile"><FaUser /></Link>
         <div className=" bg-red-600/60 rounded-full cursor-pointer" onClick={()=> {
           dispatch(logoutState())
