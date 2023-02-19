@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import UserPosts from "../components/UserPosts";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import FollowersModal from "../components/FollowersModal"
+import FollowingModal from "../components/FollowingModal"
 
 const UserDetail = () => {
   const { username } = useParams();
@@ -14,6 +16,8 @@ const UserDetail = () => {
   const [isFollowed, setIsFollowed] = useState(false);
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const [ isFollowersModal, setIsFollowersModal] = useState(false)
+  const [ isFollowingModal, setIsFollowingModal] = useState(false)
 
   useEffect(() => {
     if (user?.username === username) {
@@ -73,8 +77,8 @@ const UserDetail = () => {
             </div>
           </div>
           <div className=" text-white hidden md:flex md:gap-10">
-            <span>{posts.length} gönderi</span> <span>{userDetail?.followers.length} takipçi</span>{" "}
-            <span>{userDetail?.following.length} takip</span>
+            <span>{posts.length} gönderi</span> <span className=" cursor-pointer" onClick={()=> setIsFollowersModal(true)}>{userDetail?.followers.length} takipçi</span>{" "}
+            <span className=" cursor-pointer" onClick={()=> setIsFollowingModal(true)}>{userDetail?.following.length} takip</span>
           </div>
           <div className=" text-white hidden md:block ">
             {userDetail?.fullname}
@@ -90,10 +94,10 @@ const UserDetail = () => {
         <div className=" flex items-center justify-center flex-col">
           <div className=" font-medium">{posts.length}</div>gönderi
         </div>
-        <div className=" flex items-center justify-center flex-col">
+        <div className=" flex items-center justify-center flex-col cursor-pointer" onClick={()=> setIsFollowersModal(true)}>
           <div className=" font-medium">{userDetail?.followers.length}</div>takipçi
         </div>
-        <div className=" flex items-center justify-center flex-col">
+        <div className=" flex items-center justify-center flex-col cursor-pointer" onClick={()=> setIsFollowingModal(true)}>
           <div className=" font-medium">{userDetail?.following.length}</div>takip
         </div>
       </div>
@@ -107,6 +111,8 @@ const UserDetail = () => {
         setProfileType={setProfileType}
       />
       <Navbar />
+      { isFollowersModal && <FollowersModal userFollowers={userDetail?.followers} setIsFollowersModal={setIsFollowersModal} />}
+      { isFollowingModal && <FollowingModal userFollowing={userDetail?.following} setIsFollowingModal={setIsFollowingModal} />}
     </div>
   );
 };
