@@ -31,8 +31,8 @@ router.post("/signup", async (req, res)=> {
             password:hashedPassword
         })
 
-        const token = jwt.sign({id: createdUser._id}, `${process.env.JWT_KEY}`, {expiresIn: '1h'})
-        return res.status(201).json({ user: createdUser, token}) 
+        const token = jwt.sign({id: createdUser._id}, `${process.env.JWT_KEY}`, {expiresIn: '10m'})
+        return res.status(201).json({token}) 
     } catch (error) {
         return res.json({ message: error.message})
     }
@@ -49,8 +49,23 @@ router.post("/signin", async (req, res)=> {
         if(!isPasswordCorrect) {
             return res.status(400).json({message: "wrong password"})
         }
-        const token = jwt.sign({id: user._id}, `${process.env.JWT_KEY}`, {expiresIn: '1h'})
-        return res.status(200).json({user, token})
+        const token = jwt.sign({id: user._id}, `${process.env.JWT_KEY}`, {expiresIn: '10m'})
+        return res.status(200).json({token})
+    }
+    catch(error) {
+        return res.status(400).json({message: error.message})
+    } 
+})
+
+router.post("/user", async (req, res)=> {
+    try {
+        const token = req.headers.token;
+        if(!token) {
+            return res.status(400).json({message: "auth error"})
+        }
+        const decodedToken = jwt.verify(token, `${process.env.JWT_KEY}`);
+        const user = await User.findOne({_id: decodedToken.id});
+        return res.status(200).json({user})
     }
     catch(error) {
         return res.status(400).json({message: error.message})

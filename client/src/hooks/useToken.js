@@ -1,17 +1,26 @@
-import { useEffect, useState } from 'react'
-import { useDispatch } from "react-redux"
-import { setUserState } from '../store/reducers/user'
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { userFetch } from "../axios";
+import { setUserState, logoutState } from "../store/reducers/user";
 
 const useToken = () => {
-    const [token, setToken] = useState('')
-    const dispatch = useDispatch()
+  const [token, setToken] = useState("");
+  const dispatch = useDispatch();
 
-    useEffect(()=> {
-      setToken(JSON.parse(localStorage.getItem('auth')))
-      dispatch(setUserState(JSON.parse(localStorage.getItem('auth'))))
-    }, [dispatch])
+  useEffect(() => {
+    setToken(JSON.parse(localStorage.getItem("auth")));
 
-  return [token]
-}
+    userFetch(JSON.parse(localStorage.getItem("auth"))?.token)
+      .then((res) => {
+        dispatch(setUserState(res.data));
+      })
+      .catch(() => {
+        dispatch(logoutState());
+        setToken(null)
+      });
+  }, [dispatch]);
 
-export default useToken
+  return [token];
+};
+
+export default useToken;

@@ -8,6 +8,8 @@ export const login = async (formData)=> await HTTP.post('/users/signin', formDat
 
 export const register = async (formData)=> await HTTP.post('/users/signup', formData);
 
+export const userFetch = async (token)=> await HTTP.post('/users/user', token, {headers: { token: token}});
+
 export const singleUser = async (user)=> await HTTP.post('/users/singleuser', user)
 
 export const followFetch = async (username, follower)=> await HTTP.post('/users/follow', username, follower)

@@ -25,7 +25,7 @@ const Home = () => {
       <Header />
 
       {posts.filter((e)=> {
-        return (user.following.includes(e.username) || e.username === user.username)
+        return (user?.following.includes(e.username) || e.username === user?.username)
       }).reverse().map((e) => (
         <div
           key={e._id}
