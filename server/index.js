@@ -18,7 +18,7 @@ app.use("/posts", postRouter)
 
 mongoose.set("strictQuery", true);
 app.listen(PORT, ()=> {
-    mongoose.connect(`${process.env.DB_CONNEVTION}`)
+    mongoose.connect(`${process.env.DB_CONNECTION}`)
     .then(()=> console.log("connected to db"))
     .catch((err)=> console.log(err))
 })
