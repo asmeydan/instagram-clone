@@ -6,7 +6,7 @@ const ProfilePosts = ({ profileType, setProfileType, posts }) => {
 
   return (
     <div className=' flex flex-col items-center justify-center text-white'>
-        <div className=' flex gap-[60px] '>
+        <div className=' flex gap-[60px] max-w-full overflow-x-auto '>
             <div className={` h-[50px] flex justify-center items-center cursor-pointer ${profileType === "GÖNDERİLER" && " border-t border-white"}`} onClick={()=>setProfileType("GÖNDERİLER")}>GÖNDERİLER</div>
             <div className={` h-[50px] flex justify-center items-center cursor-pointer ${profileType === "KAYDEDİLENLER" && " border-t border-white"}`} onClick={()=>setProfileType("KAYDEDİLENLER")}>KAYDEDİLENLER</div>
             <div className={` h-[50px] flex justify-center items-center cursor-pointer ${profileType === "ETİKETLENENLER" && " border-t border-white"}`} onClick={()=>setProfileType("ETİKETLENENLER")}>ETİKETLENENLER</div>

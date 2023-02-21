@@ -56,7 +56,7 @@ const UserDetail = () => {
                     setIsFollowed(false)
                     unfollowFetch({username: userDetail?.username, follower: user?.username}).catch((err)=> console.log(err))
                   }}
-                  className={` h-8 px-4 rounded-lg font-medium  bg-white text-black `}
+                  className={` hidden sm:block h-8 px-4 rounded-lg font-medium  bg-white text-black `}
                 >
                   Takiptesin
                 </button>
@@ -66,12 +66,12 @@ const UserDetail = () => {
                     setIsFollowed(true)
                     followFetch({username: userDetail?.username, follower: user?.username}).catch((err)=> console.log(err))
                   }}
-                  className={` h-8 px-4 rounded-lg font-medium bg-sky-600 text-white `}
+                  className={` hidden sm:block h-8 px-4 rounded-lg font-medium bg-sky-600 text-white `}
                 >
                   Takip Et
                 </button>
               )}
-              <button className=" h-8 px-4 bg-white rounded-lg font-medium ">
+              <button className=" hidden sm:block h-8 px-4 bg-white rounded-lg font-medium ">
                 Mesaj Gönder
               </button>
             </div>

@@ -34,7 +34,7 @@ const Profile = () => {
               <RiSettings3Fill />
             </div>
             <div>
-              <button className=" w-[250px] h-8 px-4 bg-white rounded-lg font-medium ">
+              <button className=" hidden sm:block w-[250px] h-8 px-4 bg-white rounded-lg font-medium ">
                 Profili düzenle
               </button>
             </div>
