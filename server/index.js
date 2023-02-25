@@ -16,9 +16,19 @@ app.use(bodyParser.urlencoded({limit: '30mb', extended: true}))
 app.use("/users", userRouter)
 app.use("/posts", postRouter)
 
-mongoose.set("strictQuery", true);
-app.listen(PORT, ()=> {
-    mongoose.connect(`${process.env.DB_CONNECTION}`)
-    .then(()=> console.log("connected to db"))
-    .catch((err)=> console.log(err))
+// mongoose.set("strictQuery", true);
+// app.listen(PORT, ()=> {
+//     mongoose.connect(`${process.env.DB_CONNECTION}`)
+//     .then(()=> console.log("connected to db"))
+//     .catch((err)=> console.log(err))
+// })
+
+mongoose.connect(`${process.env.DB_CONNECTION}`, {
+  useNewUrlParser: true
+}).then(()=> {
+  app.listen(PORT, ()=> {
+    console.log("server is running")
+  })
+}).catch((error)=> {
+  console.log(error.message)
 })
